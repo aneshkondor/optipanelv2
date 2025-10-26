@@ -52,7 +52,7 @@ export function MetricsProvider({ children }: { children: ReactNode }) {
 
     const pollInterval = setInterval(async () => {
       try {
-        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+        const API_URL = import.meta.env.VITE_API_URL || '';
         const response = await fetch(`${API_URL}/api/metrics/current`);
         const data = await response.json();
 
