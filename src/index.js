@@ -386,22 +386,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`\n🚀 Revenue Optimization Server Started`);
-  console.log(`📍 Port: ${PORT}`);
-  console.log(`🌐 Health check: http://localhost:${PORT}/health`);
-  console.log(`📊 Stats: http://localhost:${PORT}/api/stats`);
-  console.log(`\n📝 API Endpoints:`);
-  console.log(`   POST /api/users - Add user to monitoring`);
-  console.log(`   POST /api/users/:userId/engagement - Update engagement data`);
-  console.log(`   POST /api/users/:userId/check - Manually check user`);
-  console.log(`   GET  /api/users/:userId/calls - Get call history`);
-  console.log(`   POST /api/monitoring/start - Start monitoring`);
-  console.log(`   POST /api/monitoring/stop - Stop monitoring`);
-  console.log(`   POST /api/webhooks/vapi - Vapi webhook endpoint\n`);
-});
-
 // Graceful shutdown
 process.on('SIGINT', () => {
   console.log('\n🛑 Shutting down gracefully...');
@@ -425,8 +409,17 @@ app.get("*", (req, res) => {
 });
 
 // --- Start Server ---
-app.listen(PORT, () => {
-  console.log(`🚀 Revenue Optimization Server Started`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🚀 Revenue Optimization Server Started`);
   console.log(`📍 Port: ${PORT}`);
   console.log(`🌐 Health check: http://localhost:${PORT}/health`);
+  console.log(`📊 Stats: http://localhost:${PORT}/api/stats`);
+  console.log(`\n📝 API Endpoints:`);
+  console.log(`   POST /api/users - Add user to monitoring`);
+  console.log(`   POST /api/users/:userId/engagement - Update engagement data`);
+  console.log(`   POST /api/users/:userId/check - Manually check user`);
+  console.log(`   GET  /api/users/:userId/calls - Get call history`);
+  console.log(`   POST /api/monitoring/start - Start monitoring`);
+  console.log(`   POST /api/monitoring/stop - Stop monitoring`);
+  console.log(`   POST /api/webhooks/vapi - Vapi webhook endpoint\n`);
 });
