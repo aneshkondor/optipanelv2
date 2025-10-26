@@ -70,7 +70,7 @@ export function MarketingFooter({ onNavigate }: MarketingFooterProps) {
                   />
                 </svg>
               </div>
-              <span className="font-semibold text-lg">ProductName</span>
+              <span className="font-semibold text-lg">OptiPanel</span>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
               World-class revenue analytics for modern B2B teams.
@@ -123,7 +123,7 @@ export function MarketingFooter({ onNavigate }: MarketingFooterProps) {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} ProductName. All rights reserved.
+            © {currentYear} OptiPanel. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <button className="text-sm text-muted-foreground hover:text-foreground transition-colors">

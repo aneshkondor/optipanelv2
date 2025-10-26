@@ -143,7 +143,7 @@ export function AppShell({ children, currentRoute, onNavigate }: AppShellProps) 
             <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
               <TrendingUp className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="font-semibold hidden sm:inline">ProductName</span>
+            <span className="font-semibold hidden sm:inline">OptiPanel</span>
           </div>
 
           {/* Search */}
@@ -377,7 +377,7 @@ export function AppShell({ children, currentRoute, onNavigate }: AppShellProps) 
                   <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
                     <TrendingUp className="h-5 w-5 text-primary-foreground" />
                   </div>
-                  <span className="font-semibold">ProductName</span>
+                  <span className="font-semibold">OptiPanel</span>
                 </div>
                 <Button
                   variant="ghost"

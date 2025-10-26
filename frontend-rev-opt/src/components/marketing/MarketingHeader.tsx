@@ -44,7 +44,7 @@ export function MarketingHeader({ onNavigate, onLogin }: MarketingHeaderProps) {
                 />
               </svg>
             </div>
-            <span className="font-semibold text-lg">ProductName</span>
+            <span className="font-semibold text-lg">OptiPanel</span>
           </button>
 
           {/* Desktop Navigation */}
