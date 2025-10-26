@@ -408,3 +408,25 @@ process.on('SIGINT', () => {
   monitor.stopMonitoring();
   process.exit(0);
 });
+
+
+// --- Serve Frontend ---
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve the built frontend (adjust path if needed)
+app.use(express.static(path.join(__dirname, "../frontend-rev-opt/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend-rev-opt/dist", "index.html"));
+});
+
+// --- Start Server ---
+app.listen(PORT, () => {
+  console.log(`🚀 Revenue Optimization Server Started`);
+  console.log(`📍 Port: ${PORT}`);
+  console.log(`🌐 Health check: http://localhost:${PORT}/health`);
+});
