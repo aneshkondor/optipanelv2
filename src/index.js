@@ -394,19 +394,44 @@ process.on('SIGINT', () => {
 });
 
 
-// --- Serve Frontend ---
+// --- Serve Frontends ---
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve the built frontend (adjust path if needed)
-app.use(express.static(path.join(__dirname, "../frontend-rev-opt/dist")));
+// Serve website-demo at /demo
+const websiteDemoPath = path.join(__dirname, "../website-demo/build");
+if (fs.existsSync(websiteDemoPath)) {
+  app.use('/demo', express.static(websiteDemoPath));
+  app.get('/demo/*', (req, res) => {
+    res.sendFile(path.join(websiteDemoPath, "index.html"));
+  });
+  console.log('📦 Serving website-demo at /demo');
+} else {
+  console.warn('⚠️  website-demo build not found at:', websiteDemoPath);
+}
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend-rev-opt/dist", "index.html"));
-});
+// Serve main dashboard (frontend-rev-opt) at root
+const frontendPath = path.join(__dirname, "../frontend-rev-opt/build");
+if (fs.existsSync(frontendPath)) {
+  app.use(express.static(frontendPath));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
+  console.log('📦 Serving frontend-rev-opt at /');
+} else {
+  console.warn('⚠️  frontend-rev-opt build not found at:', frontendPath);
+  // Fallback route when build doesn't exist
+  app.get("*", (req, res) => {
+    res.status(503).json({
+      error: 'Frontend not built yet',
+      message: 'Run the build script first'
+    });
+  });
+}
 
 // --- Start Server ---
 app.listen(PORT, '0.0.0.0', () => {

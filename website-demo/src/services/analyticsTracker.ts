@@ -49,7 +49,9 @@ class AnalyticsTracker {
   // Send on activity
   private lastSendTime: number = 0;
   private readonly MIN_SEND_INTERVAL_MS = 2000; // Minimum 2 seconds between sends
-  private readonly BACKEND_URL = 'http://localhost:3001/api/metrics/track';
+  private readonly BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+    ? `${import.meta.env.VITE_BACKEND_URL}/api/metrics/track`
+    : '/api/metrics/track'; // Use relative path when on same server
   private pendingSend: boolean = false;
 
   constructor() {
