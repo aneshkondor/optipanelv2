@@ -92,6 +92,15 @@ class MetricsAggregator {
       ? userMetrics.reduce((sum, u) => sum + (u.sessionDuration || 0), 0) / totalUsers
       : 0;
 
+    // E-commerce metrics aggregation
+    const totalCartValue = userMetrics.reduce((sum, u) => sum + (u.cartValue || 0), 0);
+    const totalCartItems = userMetrics.reduce((sum, u) => sum + (u.cartItems || 0), 0);
+    const activeShoppers = userMetrics.filter(u =>
+      (u.cartItems || 0) > 0 || (u.cartValue || 0) > 0
+    ).length;
+    const checkoutStarted = userMetrics.filter(u => u.checkoutStarted).length;
+    const ordersCompleted = userMetrics.filter(u => u.orderCompleted).length;
+
     // Top features
     const featureCount = {};
     userMetrics.forEach(user => {
@@ -112,6 +121,13 @@ class MetricsAggregator {
       totalClicks,
       avgSessionDuration: Math.round(avgSessionDuration),
       topFeatures,
+      // E-commerce specific
+      totalCartValue: Math.round(totalCartValue * 100) / 100,
+      totalCartItems,
+      activeShoppers,
+      checkoutStarted,
+      ordersCompleted,
+      conversionRate: totalUsers > 0 ? Math.round((ordersCompleted / totalUsers) * 100) : 0,
     };
   }
 
